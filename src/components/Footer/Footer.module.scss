@@ -1,0 +1,90 @@
+.Footer {
+    padding: 3rem 0;
+    background-color: var(--gray-900);
+    color: white;
+
+    text-align: center;
+
+    @media (min-width: 1024px) {
+        text-align: left;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+
+    @media (min-width: 1024px) {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-end;
+    }
+}
+
+.logo {
+    cursor: pointer;
+
+    path {
+        fill: white;
+    }
+
+    @media (min-width: 1024px) {
+        margin-right: auto;
+    }
+
+    &:hover {
+        path {
+            fill: var(--primary-300);
+        }
+    }
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media (min-width: 1024px) {
+        gap: 4rem;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+.menuGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h4 {
+        font-size: 1rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    a {
+        font-size: 0.75rem;
+        color: var(--gray-100);
+        text-decoration: none;
+
+        &:hover {
+            color: var(--primary-300);
+        }
+    }
+}
+
+.socials {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+
+    a:hover path {
+        fill: var(--primary-300);
+    }
+
+    @media (min-width: 1024px) {
+        margin-left: 3rem;
+    }
+}

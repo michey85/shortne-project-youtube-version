@@ -1,0 +1,42 @@
+.header {
+    position: relative;
+    display: flex;
+
+    align-items: center;
+    padding: 2rem 1.5rem !important;
+    
+    @media (min-width: 767px) {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+.logo {
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+.burger {
+    margin-left: auto;
+    font-size: 1.75rem;
+    color: var(--gray-300);
+    cursor: pointer;
+}
+
+.mobileMenu {
+    position: absolute;
+    width: 100%;
+    max-width: 320px;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    overflow: hidden;
+
+    background-color: var(--primary-600);
+    border-radius: var(--radii);
+    padding: 1.25rem;
+
+    & * {
+        color: white !important;
+    }
+}

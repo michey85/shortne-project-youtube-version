@@ -1,0 +1,20 @@
+.CallToAction {
+    background-image: url('../../images/bg-boost-mobile.svg');
+    background-color: var(--primary-600);
+    background-size: cover;
+    background-position: center;
+    padding: 4rem 0;
+    
+    color: white;
+    
+    text-align: center;
+
+    h2 {
+        margin-top: 0;
+    }
+    
+    @media (min-width: 1024px) {
+        padding: 3rem 0;
+        background-image: url('../../images/bg-boost-desktop.svg');
+    }
+}
