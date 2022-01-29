@@ -1,7 +1,9 @@
+import {forwardRef} from 'react';
 import cn from 'classnames';
+import {motion} from 'framer-motion';
 import classes from './Button.module.scss';
 
-export const Button = ({onClick, variant = '', size = 'medium', type = 'button', children}) => {
+export const Button = forwardRef(({onClick, variant = '', size = 'medium', type = 'button', children}, ref) => {
     const mainCn = cn(
         classes.button,
         classes[size],
@@ -10,6 +12,7 @@ export const Button = ({onClick, variant = '', size = 'medium', type = 'button',
 
     return (
         <button
+            ref={ref}
             className={mainCn}
             type={type}
             onClick={onClick}
@@ -17,4 +20,6 @@ export const Button = ({onClick, variant = '', size = 'medium', type = 'button',
             {children}
         </button>
     )
-}
+})
+
+export const MButton = motion(Button);
