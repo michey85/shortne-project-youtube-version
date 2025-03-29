@@ -22,20 +22,20 @@ const Shortens = () => {
     <section className={classes.Shortens}>
       <div className="container">
         {links.map((item) => (
-          <AnimatePresence key={item.code}>
+          <AnimatePresence key={item.shortLink}>
             <motion.div
               className={classes.item}
-              data-active={copiedLinks === item.full_short_link2}
+              data-active={copiedLinks === item.shortLink}
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
             >
-              <span>{item.original_link}</span>
-              <span>{item.full_short_link2}</span>
+              <span>{item.originalLink}</span>
+              <span>{item.shortLink}</span>
               <Button
                 variant="square"
-                onClick={() => copyToClipboard(item.full_short_link2)}
+                onClick={() => copyToClipboard(item.shortLink)}
               >
-                {copiedLinks === item.full_short_link2 ? 'Copied!' : 'Copy'}
+                {copiedLinks === item.shortLink ? 'Copied!' : 'Copy'}
               </Button>
             </motion.div>
           </AnimatePresence>
