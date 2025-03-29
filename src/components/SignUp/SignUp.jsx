@@ -1,15 +1,15 @@
-import {Form} from './Form';
+import { useDispatch } from 'react-redux';
 
-export const SignUp = ({closeModal}) => {
+import { createUser } from '../../store/slice/userSlice';
+import { Form } from './Form';
 
-    const handleRegister = (email, pass) => {
-        closeModal();
-    }
+export const SignUp = ({ closeModal }) => {
+  const dispatch = useDispatch();
 
-    return (
-        <Form
-            handleClick={handleRegister}
-            title="Register"
-        />
-    )
-}
+  const handleRegister = (email, pass) => {
+    dispatch(createUser({ email, password: pass }));
+    closeModal();
+  };
+
+  return <Form handleClick={handleRegister} title="Register" />;
+};
