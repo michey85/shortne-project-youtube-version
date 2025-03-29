@@ -22,30 +22,35 @@ const initialState = {
 const linkSlice = createSlice({
   name: 'links',
   initialState,
-  extraReducers: {
-    [createShortLink.rejected]: (state) => {
-      state.loading = 'rejected';
-    },
-    [createShortLink.pending]: (state) => {
-      state.loading = 'loading';
-    },
-    [createShortLink.fulfilled]: (state, action) => {
-      const { ok, result } = action.payload;
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(createShortLink.rejected, (state) => {
+        state.loading = 'rejected';
+      })
+      .addCase(createShortLink.pending, (state) => {
+        state.loading = 'loading';
+      })
+      .addCase(createShortLink.fulfilled, (state, action) => {
+        const { ok, result } = action.payload;
 
-      if (ok) {
-        const item = {
-          originalLink: action.meta.arg,
-          shortLink: result,
-        };
-        state.items.push(item);
-        state.loading = 'idle';
-      } else {
-        state.loading = 'error';
-      }
-    },
+        if (ok) {
+          const item = {
+            originalLink: action.meta.arg,
+            shortLink: result,
+          };
+          state.items.push(item);
+          state.loading = 'idle';
+        } else {
+          state.loading = 'error';
+        }
+      });
+  },
+  selectors: {
+    selectLoading: (state) => state.loading,
+    selectLinks: (state) => state.items,
   },
 });
 
-export const selectLoading = (state) => state.links.loading;
-export const selectLinks = (state) => state.links.items;
+export const { selectLoading, selectLinks } = linkSlice.selectors;
 export default linkSlice.reducer;
