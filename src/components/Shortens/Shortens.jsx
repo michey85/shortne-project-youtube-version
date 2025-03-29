@@ -3,8 +3,13 @@ import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteShortLink, selectLinks } from '../../store/slice/linkSlice';
+import {
+  deleteShortLink,
+  editShortLink,
+  selectLinks,
+} from '../../store/slice/linkSlice';
 import { Button } from '../Button';
+import EditableText from '../EditableText/EditableText';
 import classes from './Shortens.module.scss';
 
 const Shortens = () => {
@@ -14,6 +19,9 @@ const Shortens = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteShortLink(id));
+  };
+  const handleEdit = (id, url) => {
+    dispatch(editShortLink({ id, url }));
   };
 
   const copyToClipboard = (link) => {
@@ -35,7 +43,12 @@ const Shortens = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
             >
-              <span>{item.originalLink}</span>
+              <EditableText
+                id={item.id}
+                value={item.originalLink}
+                onSave={handleEdit}
+              />
+              {/* <span>{item.originalLink}</span> */}
               <span>{item.shortLink}</span>
               <Button
                 variant="square"

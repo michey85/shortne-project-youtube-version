@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.editableInput {
+  flex-grow: 1;
+}
+
+.btn {
+  padding: 0 1rem;
+}

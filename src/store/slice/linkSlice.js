@@ -14,6 +14,19 @@ export const createShortLink = createAsyncThunk(
   }
 );
 
+export const editShortLink = createAsyncThunk(
+  'links/editShortLink',
+  async ({ url, id }) => {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url }),
+    });
+    const result = await response.json();
+    return { ok: response.ok, result };
+  }
+);
+
 export const deleteShortLink = createAsyncThunk(
   'links/deleteShortLink',
   async (urlId) => {
@@ -52,6 +65,15 @@ const linkSlice = createSlice({
           state.loading = 'idle';
         } else {
           state.loading = 'error';
+        }
+      })
+      .addCase(editShortLink.fulfilled, (state, action) => {
+        const { ok, result } = action.payload;
+        const id = action.meta.arg.id;
+
+        if (ok) {
+          const idx = state.items.findIndex((item) => item.id === id);
+          state.items[idx] = result;
         }
       })
       .addCase(deleteShortLink.fulfilled, (state, action) => {
