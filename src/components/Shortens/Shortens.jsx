@@ -48,7 +48,6 @@ const Shortens = () => {
                 value={item.originalLink}
                 onSave={handleEdit}
               />
-              {/* <span>{item.originalLink}</span> */}
               <span>{item.shortLink}</span>
               <Button
                 variant="square"
