@@ -9,8 +9,8 @@ export const createShortLink = createAsyncThunk(
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url }),
     });
-    const { shortUrl } = await response.json();
-    return { ok: response.ok, result: shortUrl };
+    const result = await response.json();
+    return { ok: response.ok, result };
   }
 );
 
@@ -35,11 +35,7 @@ const linkSlice = createSlice({
         const { ok, result } = action.payload;
 
         if (ok) {
-          const item = {
-            originalLink: action.meta.arg,
-            shortLink: result,
-          };
-          state.items.push(item);
+          state.items.push(result);
           state.loading = 'idle';
         } else {
           state.loading = 'error';
