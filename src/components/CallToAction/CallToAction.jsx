@@ -1,6 +1,6 @@
 import classes from './CallToAction.module.scss';
 
-import { Button } from 'components/Button'
+import { Button } from '../Button';
 
 const CallToAction = () => {
   return (
@@ -8,7 +8,7 @@ const CallToAction = () => {
       <h2>Boost your links today</h2>
       <Button>Get Started</Button>
     </section>
-  )
-}
+  );
+};
 
-export {CallToAction};
+export { CallToAction };

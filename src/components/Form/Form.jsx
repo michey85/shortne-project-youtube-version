@@ -1,7 +1,7 @@
-import {useForm} from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux'
-import {Button} from 'components/Button';
-import { createShortLink, selectLoading } from 'store/slice/linkSlice';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { createShortLink, selectLoading } from '../../store/slice/linkSlice';
+import { Button } from '../Button';
 
 import classes from './Form.module.scss';
 
@@ -10,14 +10,14 @@ const Form = () => {
   const dispatch = useDispatch();
   const {
     register,
-    formState: {errors},
+    formState: { errors },
     handleSubmit,
     reset,
   } = useForm({
-    mode: 'onSubmit'
+    mode: 'onSubmit',
   });
 
-  const onSubmit = ({Url}) => {
+  const onSubmit = ({ Url }) => {
     dispatch(createShortLink(Url));
     reset();
   };
@@ -27,7 +27,7 @@ const Form = () => {
       <div className="container">
         <form
           className={classes.form}
-          autoComplete='off'
+          autoComplete="off"
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
@@ -37,12 +37,15 @@ const Form = () => {
             {...register('Url', {
               required: 'Please add a link',
               pattern: {
-                value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
+                value:
+                  /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
                 message: 'Please enter a valid url',
               },
             })}
             style={{
-              outlineColor: errors.Url ? 'var(--secondary-300)' : 'currentColor',
+              outlineColor: errors.Url
+                ? 'var(--secondary-300)'
+                : 'currentColor',
               outlineWidth: errors.Url ? '4px' : '1px',
             }}
             disabled={loading === 'loading'}
@@ -52,16 +55,16 @@ const Form = () => {
             type="submit"
             size="medium"
             disabled={loading === 'loading'}
-          >Shorten it!</Button>
+          >
+            Shorten it!
+          </Button>
           {errors.Url && (
-            <div className={classes.error}>
-              {errors.Url.message}
-            </div>
+            <div className={classes.error}>{errors.Url.message}</div>
           )}
         </form>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export {Form};
+export { Form };
