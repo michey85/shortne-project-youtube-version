@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { logoutUser, selectUser } from '../../store/slice/userSlice';
+import { logoutUser } from '../../store/actions/userActions';
+import { selectUser } from '../../store/slice/userSlice';
 import { Button } from '../Button';
 import classes from './Menu.module.scss';
 

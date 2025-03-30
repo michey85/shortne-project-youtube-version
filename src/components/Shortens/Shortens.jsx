@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteShortLink,
   editShortLink,
-  selectLinks,
-} from '../../store/slice/linkSlice';
+} from '../../store/actions/linkActions';
+import { selectLinks } from '../../store/slice/linkSlice';
 import { Button } from '../Button';
 import EditableText from '../EditableText/EditableText';
 import classes from './Shortens.module.scss';

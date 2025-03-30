@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { createUser } from '../../store/slice/userSlice';
+import { createUser } from '../../store/actions/userActions';
 import { Form } from './Form';
 
 export const SignUp = ({ closeModal }) => {

@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { createShortLink, selectLoading } from '../../store/slice/linkSlice';
+import { selectLoading } from '../../store/slice/linkSlice';
 import { Button } from '../Button';
 
+import { createShortLink } from '../../store/actions/linkActions';
 import classes from './Form.module.scss';
 
 const Form = () => {
