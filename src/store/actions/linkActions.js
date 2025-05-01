@@ -6,7 +6,9 @@ const BASE_URL = `${API_BASE_URL}/shortner`;
 export const fetchShortLinks = createAsyncThunk(
   'links/fetchShortLinks',
   async () => {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(BASE_URL, {
+      credentials: 'include',
+    });
     const result = await response.json();
     return { ok: response.ok, result };
   }
@@ -17,6 +19,7 @@ export const createShortLink = createAsyncThunk(
   async (url) => {
     const response = await fetch(BASE_URL, {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url }),
     });
@@ -30,6 +33,7 @@ export const editShortLink = createAsyncThunk(
   async ({ url, id }) => {
     const response = await fetch(`${BASE_URL}/${id}`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url }),
     });
@@ -43,6 +47,7 @@ export const deleteShortLink = createAsyncThunk(
   async (urlId) => {
     const response = await fetch(`${BASE_URL}/${urlId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
     });
     return {

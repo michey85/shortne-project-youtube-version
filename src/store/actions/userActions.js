@@ -9,6 +9,7 @@ export const createUser = createAsyncThunk(
   async (userData) => {
     const response = await fetch(BASE_URL, {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
     });
@@ -22,16 +23,20 @@ export const loginUser = createAsyncThunk(
   async (credentials) => {
     const response = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
     });
+
     const result = await response.json();
+
     return { ok: response.ok, result };
   }
 );
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   const response = await fetch(`${BASE_URL}/logout`, {
+    credentials: 'include',
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });

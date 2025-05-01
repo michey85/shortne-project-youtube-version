@@ -21,6 +21,14 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        const { ok, result } = action.payload;
+        if (!ok) {
+          state.loading = 'error';
+          state.error = result.message;
+          state.user = null;
+          return;
+        }
+
         state.loading = 'idle';
         state.user = action.payload.result;
       })

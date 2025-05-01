@@ -9,6 +9,7 @@ import { logoutUser } from '../actions/userActions';
 const initialState = {
   items: [],
   loading: 'idle',
+  error: null,
 };
 
 const linkSlice = createSlice({
@@ -17,11 +18,12 @@ const linkSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createShortLink.rejected, (state) => {
+      .addCase(createShortLink.rejected, (state, action) => {
         state.loading = 'rejected';
       })
       .addCase(createShortLink.pending, (state) => {
         state.loading = 'loading';
+        state.error = null;
       })
       .addCase(createShortLink.fulfilled, (state, action) => {
         const { ok, result } = action.payload;
@@ -31,6 +33,7 @@ const linkSlice = createSlice({
           state.loading = 'idle';
         } else {
           state.loading = 'error';
+          state.error = result.message;
         }
       })
       .addCase(editShortLink.fulfilled, (state, action) => {
@@ -53,13 +56,16 @@ const linkSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.items = [];
+        state.error = null;
+        state.loading = 'idle';
       });
   },
   selectors: {
     selectLoading: (state) => state.loading,
     selectLinks: (state) => state.items,
+    selectError: (state) => state.error,
   },
 });
 
-export const { selectLoading, selectLinks } = linkSlice.selectors;
+export const { selectLoading, selectLinks, selectError } = linkSlice.selectors;
 export default linkSlice.reducer;

@@ -7,8 +7,13 @@ export const Login = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   const handleLogin = (email, password) => {
-    dispatch(loginUser({ email, password }));
-    closeModal();
+    dispatch(loginUser({ email, password })).then((res) => {
+      if (res.payload?.ok) {
+        closeModal();
+      } else {
+        alert(res.payload?.result.message || 'Login failed');
+      }
+    });
   };
 
   return <Form handleClick={handleLogin} title="Login" />;

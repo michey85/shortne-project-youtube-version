@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLoading } from '../../store/slice/linkSlice';
+import { selectError, selectLoading } from '../../store/slice/linkSlice';
 import { Button } from '../Button';
 
 import { createShortLink } from '../../store/actions/linkActions';
@@ -8,6 +8,7 @@ import classes from './Form.module.scss';
 
 const Form = () => {
   const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
   const {
     register,
@@ -62,6 +63,7 @@ const Form = () => {
           {errors.Url && (
             <div className={classes.error}>{errors.Url.message}</div>
           )}
+          {error && <div className={classes.error}>{error}</div>}
         </form>
       </div>
     </section>
