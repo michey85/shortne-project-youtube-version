@@ -3,6 +3,7 @@ import {
   createShortLink,
   deleteShortLink,
   editShortLink,
+  fetchShortLinks,
 } from '../actions/linkActions';
 import { logoutUser } from '../actions/userActions';
 
@@ -53,6 +54,25 @@ const linkSlice = createSlice({
           const idx = state.items.findIndex((item) => item.id === id);
           state.items.splice(idx, 1);
         }
+      })
+      .addCase(fetchShortLinks.fulfilled, (state, action) => {
+        const { ok, result } = action.payload;
+
+        if (ok) {
+          state.items = result;
+          state.loading = 'idle';
+        } else {
+          state.loading = 'error';
+          state.error = result.message;
+        }
+      })
+      .addCase(fetchShortLinks.pending, (state) => {
+        state.loading = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchShortLinks.rejected, (state, action) => {
+        state.loading = 'rejected';
+        state.error = action.error.message;
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.items = [];
